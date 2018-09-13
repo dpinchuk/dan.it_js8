@@ -42,7 +42,7 @@ let testArr = [
     },
 
     {
-        name: "Anna",
+        name: "ira",
         lastName: "Eva",
         age: 20,
         position: "student",
@@ -89,7 +89,6 @@ function filterCollection(array, keyWord, findAll) {
                 let result = null;
                 if (typeof item === 'object') {
                     Object.keys(item).forEach((key) => {
-                        let itm = String(item[key]).toLowerCase();
                         if (arrKeyWord.indexOf(String(item[key]).toLowerCase()) !== -1) {
                             result = item;
                         }
@@ -109,6 +108,23 @@ function filterCollection(array, keyWord, findAll) {
     return arr;
 }
 
-let result = filterCollection(testArr, "  male en ", false);
+function filteritems(array, keyWord, findAll) {
+
+    let arr = [];
+
+    if (typeof keyWord !== "string") {
+        keyWord = String(keyWord);
+    }
+
+    keyWord = keyWord.trim();
+
+    return array.filter(function (item) {
+        return item.score > 40 && item.status && (item.populations.filter(function (population) {
+            return population.population_name === 'Heart failure';
+        })).length;
+    });
+}
+
+let result = filterCollection(testArr, "  ira    ", false);
 
 console.log(result);
