@@ -85,7 +85,6 @@ function filterCollection(array, keyWord, findAll) {
 
     if (arguments.length === 3) {
         if (findAll === true) {
-
             arr = array.filter((item) => {
                 let result = null;
                 if (typeof item === 'object') {
