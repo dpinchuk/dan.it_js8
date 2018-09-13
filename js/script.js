@@ -84,7 +84,7 @@ function filterCollection(array, keyWord, findAll) {
     });
 
     if (arguments.length === 3) {
-        if (findAll === true) {
+        if (!findAll) {
             arr = array.filter((item) => {
                 let result = null;
                 if (typeof item === 'object') {
@@ -109,6 +109,6 @@ function filterCollection(array, keyWord, findAll) {
     return arr;
 }
 
-let result = filterCollection(testArr, "marina SASHA iRa dimA ", true);
+let result = filterCollection(testArr, "  male en ", false);
 
 console.log(result);
