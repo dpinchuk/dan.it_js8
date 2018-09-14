@@ -22,52 +22,68 @@
  Реализацию данной задачи можно использовать в реальной жизни. Например, если на странице есть таблица с данными, а вверху есть строка поиска, данную функцию можно использовать для фильтра значений в таблице при вводе ключевых слов в строку поиска
  */
 
-let testArr = [
-    {
-        name: "Dima",
-        age: 33,
-        position: "developer",
-        gender: "male",
-        lang: "ru"
-    },
+let testArr =
+    [
+        {
+            name: "Toyota",
+            description: "Camry 2018",
+            contentType:
+                {
+                    name: "Left side",
+                    description: "Auto gear"
+                },
+            locales:
+                {
+                    name: "en_EN",
+                    description: "Europe, America"
+                }
+        },
 
-    {
-        name: "Vita",
-        lastName: "Vitova",
-        age: 30,
-        position: "manager",
-        education: "high",
-        gender: "female",
-        lang: "en"
-    },
+        {
+            name: "Toyota",
+            description: "Land Cruiser 2018",
+            contentType:
+                {
+                    name: "Left Right side",
+                    description: "Auto gear"
+                },
+            locales:
+                {
+                    name: "en_EN",
+                    description: "Europe, Asia"
+                }
+        },
 
-    {
-        name: "ira",
-        lastName: "Eva",
-        age: 20,
-        position: "student",
-        lang: "ru en",
-        gender: "female"
-    },
+        {
+            name: "BMW",
+            description: "X5 2018",
+            contentType:
+                {
+                    name: "Left side",
+                    description: "Auto gear"
+                },
+            locales:
+                {
+                    name: "en_US",
+                    description: "North America"
+                }
+        },
 
-    "Sasha",
-
-    {
-        name: "Vova",
-        age: 40,
-        position: "Lawyer",
-        gender: "male"
-    },
-
-    "Marina",
-
-    "Ira",
-
-    {
-        name: "Misha",
-        gender: "male"
-    }
-];
+        {
+            name: "Mitsubishi",
+            description: "Colt 2018",
+            contentType:
+                {
+                    name: "Left side",
+                    description: "Robo gear"
+                },
+            locales:
+                {
+                    name: "en_EN ru_RU",
+                    description: "Europe, Asia"
+                }
+        }
+    ];
 
 function filterCollection(array, keyWord, findAll) {
 
@@ -108,6 +124,13 @@ function filterCollection(array, keyWord, findAll) {
     return arr;
 }
 
+function f(array) {
+    array.forEach((item) => {
+        let str = item.join("__");
+        console.log(str);
+    })
+}
+
 function filteritems(array, keyWord, findAll) {
 
     let arr = [];
@@ -119,12 +142,17 @@ function filteritems(array, keyWord, findAll) {
     keyWord = keyWord.trim();
 
     return array.filter(function (item) {
-        return item.score > 40 && item.status && (item.populations.filter(function (population) {
-            return population.population_name === 'Heart failure';
-        })).length;
+
+
+
+        // return item.score > 40 && item.status && (item.populations.filter(function (population) {
+        //     return population.population_name === 'Heart failure';
+        // })).length;
     });
 }
 
-let result = filterCollection(testArr, "  ira    ", false);
+//let result = filterCollection(testArr, "  ira    ", false);
 
-console.log(result);
+//console.log(result);
+
+f(testArr);
