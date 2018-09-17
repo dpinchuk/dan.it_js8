@@ -157,6 +157,19 @@ function filterCollection(array, keyWord, findAll) {
                 }
             });
         } else {
+            arr = array.filter((item) => {
+                if (typeof item === 'object') {
+                    let str = convertToString(item);
+                    return arrKeyWord.some((e) => {
+                        return str.includes(e);
+                    })
+                } else {
+
+                    return arrKeyWord.some((e) => {
+                        return item.toLowerCase().includes(e);
+                    });
+                }
+            });
 
         }
     } else {
