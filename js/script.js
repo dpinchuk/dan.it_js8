@@ -39,6 +39,8 @@
  в строку поиска
  */
 
+const PARAM_LIMIT = 3;
+
 let vehicles =
     [
         {
@@ -123,12 +125,13 @@ let convertToString = (obj) => {
 };
 
 function filterCollection(array, keyWord, findAll) {
-
     if (typeof keyWord !== "string") {
         keyWord = String(keyWord);
     }
 
     keyWord = keyWord.trim();
+
+    let arrParams = [];
 
     let arrKeyWord = keyWord.split(" ").filter((item) => {
         return item !== "";
@@ -139,9 +142,8 @@ function filterCollection(array, keyWord, findAll) {
     });
 
     let arr = [];
-    let isEntry;
 
-    if (arguments.length === 3) {
+    if (arguments.length === PARAM_LIMIT) {
         if (findAll) {
             arr = array.filter((item) => {
                 if (typeof item === 'object') {
@@ -172,10 +174,28 @@ function filterCollection(array, keyWord, findAll) {
             });
 
         }
-    } else {
+    } else if (arguments.length > PARAM_LIMIT) {
+        for (let i = PARAM_LIMIT; i < arguments.length; i++) {
+            arrParams.push(arguments[i]);
+        }
 
+        if (findAll) {
+            arr = array.forEach((item) => {
+                if (typeof item === 'object') {
+                    for (let i = 0; i < arrParams.length; i++) {
+                        let arrStr = arrParams[i].split(".");
+                    }
+
+                    console.log(Object.keys((item)));
+                    console.log(item['contentType']['name']);
+                    }
+                })
+        } else {
+        }
+    } else {
+        console.log("Error parameters!");
     }
     return arr;
 }
 
-console.log(filterCollection(vehicles, "  Colt   bmw toyota ", true));
+console.log(filterCollection(vehicles, "  Colt   bmw toyota ", true, 'contentType.name', 'locales.name'));
