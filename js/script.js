@@ -39,7 +39,7 @@
  в строку поиска
  */
 
-let testArr =
+let vehicles =
     [
         {
             name: "Toyota",
@@ -52,7 +52,7 @@ let testArr =
             locales:
                 {
                     name: "en_EN",
-                    description: "Europe, America"
+                    description: "Europe, America, BMW, Colt"
                 }
         },
 
@@ -82,7 +82,7 @@ let testArr =
             locales:
                 {
                     name: "en_US",
-                    description: "North America"
+                    description: "North America Colt"
                 }
         },
 
@@ -99,68 +99,30 @@ let testArr =
                     name: "en_EN ru_RU",
                     description: "Europe, Asia"
                 }
-        }
+        },
+
+        {
+            name: "Mitsubishi",
+            description: "Colt 2007",
+            contentType:
+                {
+                    name: "Left side",
+                    description: "Robo gear"
+                },
+            locales:
+                {
+                    name: "en_EN ru_RU",
+                    description: "Europe, Asia"
+                }
+        },
+        "Colt 2008, 1.3 Robot bmw toyota"
     ];
 
+let convertToString = (obj) => {
+    return JSON.stringify(obj).toLowerCase();
+};
+
 function filterCollection(array, keyWord, findAll) {
-
-    if (arguments === 3) {
-        if (findAll) {
-
-        } else {
-
-        }
-    } else {
-
-    }
-
-    // let arr = [];
-    //
-    // if (typeof keyWord !== "string") {
-    //     keyWord = String(keyWord);
-    // }
-    //
-    // keyWord = keyWord.trim();
-    //
-    // let arrKeyWord = keyWord.split(" ").map((item) => {
-    //     return item.toLowerCase();
-    // });
-    //
-    // if (arguments.length === 3) {
-    //     if (!findAll) {
-    //         arr = array.filter((item) => {
-    //             let result = null;
-    //             if (typeof item === 'object') {
-    //                 Object.keys(item).forEach((key) => {
-    //                     if (arrKeyWord.indexOf(String(item[key]).toLowerCase()) !== -1) {
-    //                         result = item;
-    //                     }
-    //                 })
-    //             } else {
-    //                 return result = arrKeyWord.indexOf(item.toLowerCase()) !== -1;
-    //             }
-    //             return result;
-    //         })
-    //     }
-    // } else if (arguments.length > 3) {
-    //
-    // } else {
-    //     console.log("Error arguments!");
-    // }
-    //
-    // return arr;
-}
-
-function f(array) {
-    array.forEach((item) => {
-        let str = item.join("__");
-        console.log(str);
-    })
-}
-
-function filteritems(array, keyWord, findAll) {
-
-    let arr = [];
 
     if (typeof keyWord !== "string") {
         keyWord = String(keyWord);
@@ -168,18 +130,39 @@ function filteritems(array, keyWord, findAll) {
 
     keyWord = keyWord.trim();
 
-    return array.filter(function (item) {
-
-
-
-        // return item.score > 40 && item.status && (item.populations.filter(function (population) {
-        //     return population.population_name === 'Heart failure';
-        // })).length;
+    let arrKeyWord = keyWord.split(" ").filter((item) => {
+        return item !== "";
     });
+
+    arrKeyWord = arrKeyWord.map((item) => {
+        return item.toLowerCase();
+    });
+
+    let arr = [];
+    let isEntry;
+
+    if (arguments.length === 3) {
+        if (findAll) {
+            arr = array.filter((item) => {
+                if (typeof item === 'object') {
+                    let str = convertToString(item);
+                    return arrKeyWord.every((e) => {
+                        return str.includes(e);
+                    })
+                } else {
+
+                    return arrKeyWord.every((e) => {
+                        return item.toLowerCase().includes(e);
+                    });
+                }
+            });
+        } else {
+
+        }
+    } else {
+
+    }
+    return arr;
 }
 
-//let result = filterCollection(testArr, "  ira    ", false);
-
-//console.log(result);
-
-f(testArr);
+console.log(filterCollection(vehicles, "  Colt   bmw toyota ", true));
